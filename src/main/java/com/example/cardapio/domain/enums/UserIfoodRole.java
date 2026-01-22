@@ -1,4 +1,4 @@
-package com.example.cardapio.domain;
+package com.example.cardapio.domain.enums;
 
 public enum UserIfoodRole {
     ADMIN("admin"),

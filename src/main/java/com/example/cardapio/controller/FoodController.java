@@ -3,6 +3,7 @@ package com.example.cardapio.controller;
 import com.example.cardapio.domain.Food;
 import com.example.cardapio.domain.dto.FoodRequestDTO;
 import com.example.cardapio.domain.dto.FoodResponseDTO;
+import com.example.cardapio.repositories.FoodRepository;
 import com.example.cardapio.services.FoodService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,7 @@ import java.util.List;
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class FoodController {
     private final FoodService foodService;
+    private final FoodRepository foodRepository;
 
     @GetMapping
     public ResponseEntity<List<FoodResponseDTO>> getAll() {
@@ -30,4 +32,10 @@ public class FoodController {
         return ResponseEntity.ok().build();
     }
 
+    @GetMapping(path = "/find")
+    public ResponseEntity<FoodResponseDTO> findByName(@RequestParam String name) {
+        Food data = foodService.findByTitle(name);
+        FoodResponseDTO responseDTO = new FoodResponseDTO(data);
+        return ResponseEntity.ok().body(responseDTO);
+    }
 }

@@ -20,5 +20,7 @@ public class FoodService {
         foodRepository.save(food);
     }
 
-
+    public Food findByTitle(String name) {
+        return foodRepository.findByTitle(name);
+    }
 }

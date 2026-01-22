@@ -1,15 +1,14 @@
 package com.example.cardapio.domain;
 
+import com.example.cardapio.domain.enums.UserIfoodRole;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.jspecify.annotations.Nullable;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -18,19 +17,26 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 @Entity
+@Table(name = "tb_user")
 public class UserIfood implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(nullable = false)
     private String password;
+    @Column(nullable = false)
     private String username;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private UserIfoodRole role;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Order> orders = new ArrayList<>();
 
     public UserIfood(String username, String password, UserIfoodRole role) {
         this.username = username;
-        this.password =password;
+        this.password = password;
         this.role = role;
     }
 
@@ -64,4 +70,5 @@ public class UserIfood implements UserDetails {
     public boolean isEnabled() {
         return UserDetails.super.isEnabled();
     }
+
 }
