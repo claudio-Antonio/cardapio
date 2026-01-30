@@ -1,6 +1,7 @@
 package com.example.cardapio.domain;
 
 import com.example.cardapio.domain.enums.UserIfoodRole;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.jspecify.annotations.Nullable;
@@ -32,6 +33,7 @@ public class UserIfood implements UserDetails {
     private UserIfoodRole role;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Order> orders = new ArrayList<>();
 
     public UserIfood(String username, String password, UserIfoodRole role) {

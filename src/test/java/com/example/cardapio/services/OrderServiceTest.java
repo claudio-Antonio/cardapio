@@ -69,7 +69,7 @@ class OrderServiceTest {
     void delete() {
         Order order = Creator.orderCreator();
 
-        Assertions.assertThatCode(() -> orderService.delete(order)).doesNotThrowAnyException();
+        Assertions.assertThatCode(() -> orderService.delete(order.getId())).doesNotThrowAnyException();
 
     }
 }

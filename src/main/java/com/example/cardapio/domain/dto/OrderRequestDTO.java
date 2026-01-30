@@ -8,8 +8,8 @@ import com.example.cardapio.domain.enums.StatusRequest;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public record OrderRequestDTO(LocalDateTime dataOrder, StatusRequest status, Double total, UserIfood user, List<Food> food) {
+public record OrderRequestDTO(LocalDateTime dataOrder, StatusRequest status, Double total, List<Food> food) {
     public OrderRequestDTO(Order order) {
-        this(order.getDataOrder(), order.getStatus(), order.getTotal(), order.getUser(), order.getFoods());
+        this(order.getDataOrder(), order.getStatus(), order.getTotal(), order.getFoods());
     }
 }

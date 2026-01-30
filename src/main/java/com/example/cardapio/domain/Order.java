@@ -20,10 +20,12 @@ public class Order implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private LocalDateTime dataOrder;
 
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.ORDINAL)
     private StatusRequest status;
+
     private Double total;
 
     @ManyToOne
@@ -40,5 +42,6 @@ public class Order implements Serializable {
         dataOrder = request.dataOrder();
         status = request.status();
         total = request.total();
+        foods = request.food();
     }
 }
